@@ -4,8 +4,11 @@
 
 - create react app
 - configure tailwind css and test
+- Routing of the app
 - Header
 - Login form
+- Sign in - Sign up form
+- Form Validation
 
 # Features
 

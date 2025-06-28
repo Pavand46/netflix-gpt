@@ -1,8 +1,28 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidateData } from "../utils/validate";
 
 const Login = () => {
   const [isSignUp, setISSignUp] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
+
+  const handleSubmitButton = () => {
+    const nameValue = name.current?.value || "";
+    const emailValue = email.current.value.trim();
+    const passwordValue = password.current.value;
+
+    const response = checkValidateData(
+      nameValue,
+      emailValue,
+      passwordValue,
+      isSignUp
+    );
+    setErrorMessage(response);
+  };
 
   const handleSignUp = () => {
     setISSignUp(!isSignUp);
@@ -19,13 +39,17 @@ const Login = () => {
         />
 
         {/* Centered Form */}
-        <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-70 w-3/12 p-6 text-white rounded-lg shadow-lg">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-70 w-3/12 p-6 text-white rounded-lg shadow-lg"
+        >
           <h1 className="text-2xl font-semibold mb-6 text-center">
             {isSignUp === true ? "Sign Up" : "Sign In"}
           </h1>
 
           {isSignUp && (
             <input
+              ref={name}
               className="py-2 mb-4 w-full px-4 rounded bg-gray-800 placeholder-gray-400"
               type="text"
               placeholder="Name"
@@ -33,18 +57,29 @@ const Login = () => {
           )}
 
           <input
+            ref={email}
             className="py-2 mb-4 w-full px-4 rounded bg-gray-800 placeholder-gray-400"
             type="text"
             placeholder="Email"
           />
 
           <input
+            ref={password}
             className="py-2 mb-4 w-full px-4 rounded bg-gray-800 placeholder-gray-400"
             type="password"
             placeholder="Password"
           />
 
-          <button className="w-full py-2 bg-red-600 hover:bg-red-700 rounded">
+          {errorMessage && (
+            <p className="m-2 p-2 text-red-500 text-sm text-center">
+              {errorMessage}
+            </p>
+          )}
+
+          <button
+            onClick={handleSubmitButton}
+            className="w-full py-2 bg-red-600 hover:bg-red-700 rounded"
+          >
             {isSignUp === true ? "Sign Up" : "Sign In"}
           </button>
 
