@@ -1,9 +1,10 @@
 import "./App.css";
+import Body from "./components/Body";
 
 function App() {
   return (
-    <div className="flex justify-center items-center font-bold text-lg">
-      Hello World
+    <div>
+      <Body />
     </div>
   );
 }
