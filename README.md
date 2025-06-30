@@ -9,6 +9,9 @@
 - Login form
 - Sign in - Sign up form
 - Form Validation
+- Authentication set up completed
+- Deployed to test
+- Authentication Logic for Sign Up and Sign In Form
 
 # Features
 

@@ -1,6 +1,6 @@
 export const checkValidateData = (name, email, password, isSignUp) => {
   if (isSignUp) {
-    if (name.trim.length < 5) return "Name must have 5 characters";
+    if (name.trim().length < 5) return "Name must have 5 characters";
   }
 
   const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(

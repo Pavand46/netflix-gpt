@@ -1,6 +1,11 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidateData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignUp, setISSignUp] = useState(false);
@@ -9,6 +14,11 @@ const Login = () => {
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
+
+  const handleSignUp = () => {
+    setISSignUp(!isSignUp);
+    setErrorMessage("");
+  };
 
   const handleSubmitButton = () => {
     const nameValue = name.current?.value || "";
@@ -22,11 +32,60 @@ const Login = () => {
       isSignUp
     );
     setErrorMessage(response);
+
+    if (response !== null) return;
+
+    if (isSignUp) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          if (errorCode === "auth/email-already-in-use") {
+            setErrorMessage("Email is already in use, Please Login");
+          } else {
+            setErrorMessage(errorCode, "->", errorMessage);
+          }
+        });
+    } else {
+      //sign in logic
+
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          console.log(errorCode);
+          console.log(errorMessage);
+
+          if (errorCode === "auth/invalid-credential") {
+            setErrorMessage("Please Enter Valid Email ID and Password");
+          } else {
+            setErrorMessage(errorCode + " -> " + errorMessage);
+          }
+        });
+    }
   };
 
-  const handleSignUp = () => {
-    setISSignUp(!isSignUp);
-  };
   return (
     <div>
       <Header />
