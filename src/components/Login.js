@@ -7,15 +7,14 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
+import { BACKGROUND_IMAGE } from "../utils/constants";
 
 const Login = () => {
   const [isSignUp, setISSignUp] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const name = useRef(null);
@@ -59,7 +58,6 @@ const Login = () => {
               // Profile updated!
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(addUser({ uid, email, displayName, photoURL }));
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
@@ -87,16 +85,12 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("/browse");
-          console.log(user);
+
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-
-          console.log(errorCode);
-          console.log(errorMessage);
 
           if (errorCode === "auth/invalid-credential") {
             setErrorMessage("Please Enter Valid Email ID and Password");
@@ -114,7 +108,7 @@ const Login = () => {
         {/* Background Image */}
         <img
           className="absolute inset-0 object-cover w-full h-full"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/75b0ed49-75ab-4a63-bd45-37bc2c95cb73/web/IN-en-20250623-TRIFECTA-perspective_ae5833b7-6ce5-4e88-853e-014f38c506f1_large.jpg"
+          src={BACKGROUND_IMAGE}
           alt="Background"
         />
 
