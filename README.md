@@ -33,6 +33,15 @@
 - Build VideoTitle component
 - Build VideoBackground component
 - Embedded the youtube video and make it autoplay and mute
+- Built Now Playing Section added tailwind css
+- Custumised Tailwind CSS for Now Playing Section for scrolling
+- Build secndery components
+- Build Movie List
+- Made Movielist scrollable
+- Build Movie Card
+- used TMDB images to display movie card
+- completed Now Playing, Trending, Popular ... totally 13 sections of movie Lists using TMDB API
+- Created custom hook for each Movie List/ category
 
 # Features
 
@@ -45,4 +54,5 @@
       - Trailer in the background
       - Movie Name
     - Movie suggestions
-    - Movie categories
+    - Movie categories / List
+      - Movie Cards
