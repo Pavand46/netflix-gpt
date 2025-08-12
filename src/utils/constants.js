@@ -17,3 +17,13 @@ export const API_OPTIONS = {
 };
 
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "te", name: "Telugu" },
+  { identifier: "es", name: "Spanish" },
+  { identifier: "hi", name: "Hindi" },
+  { identifier: "ta", name: "Tamil" },
+  { identifier: "ml", name: "Malayalam" },
+  { identifier: "kn", name: "Kannada" },
+];

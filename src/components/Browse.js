@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import useHindiMovies from "../hooks/useHindiMovies";
 import useKannadaMovies from "../hooks/useKannadaMovies";
 import useMalayalamMovies from "../hooks/useMalayalamMovies";
@@ -10,6 +11,7 @@ import useTelugudMovies from "../hooks/useTeluguMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useTrendingList from "../hooks/useTrendingList";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
+import GPTSearch from "./GPTSearchPage";
 import Header from "./Header";
 import MainContainer from "./MainContainer";
 import SeconderyContainer from "./SeconderyContainer";
@@ -28,11 +30,19 @@ const Browse = () => {
   usePopularTvSeries();
   usePopularTeluguTvSeries();
 
+  const showGPTSearch = useSelector((store) => store.gpt.showGPTSearch);
+
   return (
     <div>
       <Header />
-      <MainContainer />
-      <SeconderyContainer />
+      {showGPTSearch ? (
+        <GPTSearch />
+      ) : (
+        <>
+          <MainContainer />
+          <SeconderyContainer />
+        </>
+      )}
     </div>
   );
 };

@@ -42,6 +42,9 @@
 - used TMDB images to display movie card
 - completed Now Playing, Trending, Popular ... totally 13 sections of movie Lists using TMDB API
 - Created custom hook for each Movie List/ category
+- Built GPT Search Page
+- GPT Search Bar
+- Made GPT Search Bar page multi-language[FEATURE]
 
 # Features
 
